@@ -74,16 +74,18 @@ function extractImage(item: Record<string, unknown>): string | null {
   }
 
   // 2. Try content:encoded field
-  if (item.content) {
-    const imgMatch = item.content.match(/<img[^>]+src="([^">]+)"/);
+  const content = item.content as string | undefined;
+  if (content) {
+    const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
     if (imgMatch && imgMatch[1]) {
       return imgMatch[1];
     }
   }
 
   // 3. Try description as fallback
-  if (item.description) {
-    const descImgMatch = item.description.match(/<img[^>]+src="([^">]+)"/);
+  const description = item.description as string | undefined;
+  if (description) {
+    const descImgMatch = description.match(/<img[^>]+src="([^">]+)"/);
     if (descImgMatch && descImgMatch[1]) {
       return descImgMatch[1];
     }
