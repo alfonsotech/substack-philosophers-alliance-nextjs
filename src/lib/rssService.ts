@@ -61,7 +61,7 @@ function extractSubtitle(content?: string, description?: string): string {
 }
 
 // Extract the first image from content, description, or enclosure
-function extractImage(item: Record<string, unknown>): string | null {
+function extractImage(item: any): string | null {
   // 1. Check for enclosure tag first (this is where Substack puts the images)
   const enclosure = item.enclosure as { url?: string; type?: string } | undefined;
   if (
@@ -135,7 +135,7 @@ export async function fetchFeed(philosopher: Philosopher): Promise<Post[]> {
     }
 
     // Map feed items to our simplified format
-    const posts: Post[] = feed.items?.map((item: Record<string, unknown>) => {
+    const posts: Post[] = feed.items?.map((item: any) => {
       // Extract cover image from enclosure, content, or description
       const coverImage = extractImage(item);
 
