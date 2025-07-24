@@ -138,6 +138,10 @@ export async function fetchFeed(philosopher: Philosopher): Promise<Post[]> {
     const posts: Post[] = feed.items?.map((item: any) => {
       // Extract cover image from enclosure, content, or description
       const coverImage = extractImage(item);
+      
+      // Extract content and description for subtitle
+      const content = item.content as string | undefined;
+      const description = item.description as string | undefined;
 
       // Create unique ID combining philosopher ID and post identifier
       const postId = item.guid || item.link || `${philosopher.id}-${Date.now()}-${Math.random()}`;
