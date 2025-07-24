@@ -63,13 +63,14 @@ function extractSubtitle(content?: string, description?: string): string {
 // Extract the first image from content, description, or enclosure
 function extractImage(item: Record<string, unknown>): string | null {
   // 1. Check for enclosure tag first (this is where Substack puts the images)
+  const enclosure = item.enclosure as { url?: string; type?: string } | undefined;
   if (
-    item.enclosure &&
-    item.enclosure.url &&
-    item.enclosure.type &&
-    item.enclosure.type.startsWith('image/')
+    enclosure &&
+    enclosure.url &&
+    enclosure.type &&
+    enclosure.type.startsWith('image/')
   ) {
-    return item.enclosure.url;
+    return enclosure.url;
   }
 
   // 2. Try content:encoded field
