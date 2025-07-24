@@ -347,7 +347,7 @@ export async function getPostsByPhilosopher(philosopherId: string): Promise<Post
         .sort({ publishDate: -1 })
         .toArray();
 
-      return posts.map(post => ({
+      return posts.map((post: any) => ({
         ...post,
         publishDate: post.publishDate.toISOString(),
       })) as Post[];
