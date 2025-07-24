@@ -62,7 +62,7 @@ function extractSubtitle(content?: string, description?: string): string {
 }
 
 // Extract the first image from content, description, or enclosure
-function extractImage(item: any): string | null {
+function extractImage(item: Record<string, unknown>): string | null {
   // 1. Check for enclosure tag first (this is where Substack puts the images)
   if (
     item.enclosure &&
@@ -133,7 +133,7 @@ export async function fetchFeed(philosopher: Philosopher): Promise<Post[]> {
     }
 
     // Map feed items to our simplified format
-    const posts: Post[] = feed.items?.map((item: any) => {
+    const posts: Post[] = feed.items?.map((item: Record<string, unknown>) => {
       // Extract cover image from enclosure, content, or description
       const coverImage = extractImage(item);
 
@@ -214,7 +214,7 @@ export async function refreshAllFeeds(philosophers: Philosopher[]): Promise<{
 
   let newContentFound = false;
   let updatedFeeds = 0;
-  let newPosts: Post[] = [];
+  const newPosts: Post[] = [];
 
   for (const philosopher of philosophers) {
     try {
@@ -261,7 +261,7 @@ export async function getAllPosts(page = 1, limit = 10, search = ''): Promise<{
       const postsCollection = db.collection('posts');
 
       // Build search query
-      let query: any = {};
+      let query: Record<string, unknown> = {};
       if (search) {
         query = {
           $or: [

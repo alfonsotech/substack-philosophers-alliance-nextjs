@@ -145,7 +145,7 @@ export function PostsList({ posts, loading, error, hasMore, onLoadMore, search }
         {/* End of posts indicator */}
         {!hasMore && posts.length > 0 && (
           <div className="text-center py-8 text-gray-500 border-t">
-            <p>You've reached the end! No more posts to load.</p>
+            <p>You&apos;ve reached the end! No more posts to load.</p>
           </div>
         )}
       </div>
