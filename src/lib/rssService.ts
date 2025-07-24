@@ -29,7 +29,6 @@ const parser = new Parser({
       ['description', 'description'],
       ['enclosure', 'enclosure'],
     ],
-    image: ['url', 'title', 'link'],
   },
 });
 
