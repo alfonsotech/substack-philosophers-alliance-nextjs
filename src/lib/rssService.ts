@@ -290,7 +290,7 @@ export async function getAllPosts(page = 1, limit = 10, search = ''): Promise<{
         .toArray();
 
       return {
-        posts: posts.map(post => ({
+        posts: posts.map((post: any) => ({
           ...post,
           publishDate: post.publishDate.toISOString(),
         })) as Post[],
