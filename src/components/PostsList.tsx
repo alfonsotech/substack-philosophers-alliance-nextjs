@@ -14,7 +14,7 @@ interface PostsListProps {
 }
 
 export function PostsList({ posts, loading, error, hasMore, onLoadMore, search }: PostsListProps) {
-  const observer = useRef<IntersectionObserver>();
+  const observer = useRef<IntersectionObserver | null>(null);
   
   // Cleanup observer on unmount
   useEffect(() => {
