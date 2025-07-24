@@ -145,12 +145,12 @@ export async function fetchFeed(philosopher: Philosopher): Promise<Post[]> {
 
       return {
         id: uniqueId,
-        title: item.title || '',
-        subtitle: extractSubtitle(item.content, item.description),
+        title: (item.title as string) || '',
+        subtitle: extractSubtitle(content, description),
         author: philosopher.name,
-        publicationName: philosopher.publicationName || feed.title || '',
-        publishDate: new Date(item.pubDate).toISOString(),
-        link: item.link || '',
+        publicationName: philosopher.publicationName || (feed.title as string) || '',
+        publishDate: new Date(item.pubDate as string).toISOString(),
+        link: (item.link as string) || '',
         philosopherId: philosopher.id,
         coverImage: coverImage || undefined,
         logoUrl: logoUrl || undefined,
