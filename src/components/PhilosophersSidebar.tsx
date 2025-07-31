@@ -75,11 +75,6 @@ function PhilosopherGroup({ group }: { group: { name: string; publications: Phil
   };
 
   const profileUrl = getProfileUrl(firstPhilosopher.substackUrl);
-  
-  // Combine publication names with pipe separator
-  const publicationNames = group.publications
-    .map(p => p.publicationName)
-    .join(' | ');
 
   return (
     <li className="philosopher-item">
@@ -124,15 +119,33 @@ function PhilosopherGroup({ group }: { group: { name: string; publications: Phil
             />
             <span className="text-sm font-medium text-gray-600">{initial}</span>
           </div>
-          <a
-            href={profileUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-gray-700 hover:text-blue-600 transition-colors flex-1 min-w-0"
-          >
-            <div className="font-medium">{group.name}</div>
-            <div className="text-xs text-gray-500">{publicationNames}</div>
-          </a>
+          <div className="flex-1 min-w-0">
+            <a
+              href={profileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-gray-700 hover:text-blue-600 transition-colors"
+            >
+              <div className="font-medium">{group.name}</div>
+            </a>
+            <div className="text-xs text-gray-500 flex flex-wrap gap-1">
+              {group.publications.map((publication, index) => (
+                <span key={publication.id}>
+                  <a
+                    href={publication.substackUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-blue-600 hover:underline transition-colors"
+                  >
+                    {publication.publicationName}
+                  </a>
+                  {index < group.publications.length - 1 && (
+                    <span className="text-gray-400 mx-1">|</span>
+                  )}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </li>
