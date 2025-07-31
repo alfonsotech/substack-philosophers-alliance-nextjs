@@ -33,15 +33,109 @@ export function PhilosophersSidebar() {
     );
   }
 
+  // Group philosophers by author name
+  const groupedPhilosophers = philosophers.reduce((acc, philosopher) => {
+    const existing = acc.find(item => item.name === philosopher.name);
+    if (existing) {
+      existing.publications.push(philosopher);
+    } else {
+      acc.push({
+        name: philosopher.name,
+        publications: [philosopher]
+      });
+    }
+    return acc;
+  }, [] as { name: string; publications: Philosopher[] }[]);
+
   return (
     <aside className="w-full lg:w-72 bg-gray-50 p-4 lg:p-6 overflow-y-auto lg:max-h-screen">
       <h2 className="text-lg lg:text-xl font-semibold mb-3 lg:mb-4 text-gray-800">Philosophers</h2>
       <ul className="flex flex-wrap gap-2 lg:flex-col lg:space-y-2 lg:gap-0">
-        {philosophers.map((philosopher) => (
-          <PhilosopherItem key={philosopher.id} philosopher={philosopher} />
+        {groupedPhilosophers.map((group) => (
+          <PhilosopherGroup key={group.name} group={group} />
         ))}
       </ul>
     </aside>
+  );
+}
+
+function PhilosopherGroup({ group }: { group: { name: string; publications: Philosopher[] } }) {
+  const firstPhilosopher = group.publications[0];
+  const initial = group.name.charAt(0).toUpperCase();
+  
+  // Convert publication URL to profile URL (use first publication for profile link)
+  const getProfileUrl = (substackUrl: string) => {
+    try {
+      const url = new URL(substackUrl);
+      const subdomain = url.hostname.split('.')[0];
+      return `https://substack.com/@${subdomain}`;
+    } catch {
+      return substackUrl;
+    }
+  };
+
+  const profileUrl = getProfileUrl(firstPhilosopher.substackUrl);
+  
+  // Combine publication names with pipe separator
+  const publicationNames = group.publications
+    .map(p => p.publicationName)
+    .join(' | ');
+
+  return (
+    <li className="philosopher-item">
+      {/* Mobile: Compact pill, Desktop: Full item */}
+      <div className="lg:hidden">
+        <a
+          href={profileUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center space-x-2 bg-white px-3 py-2 rounded-full border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors text-sm whitespace-nowrap"
+        >
+          <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden flex-shrink-0">
+            <img
+              src={`/api/philosophers/${firstPhilosopher.id}/logo`}
+              alt={group.name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                target.nextElementSibling!.textContent = initial;
+              }}
+            />
+            <span className="text-xs font-medium text-gray-600">{initial}</span>
+          </div>
+          <span className="font-medium">{group.name}</span>
+        </a>
+      </div>
+
+      {/* Desktop: Full item */}
+      <div className="hidden lg:block">
+        <div className="flex items-center space-x-3 p-2 rounded-lg hover:bg-white transition-colors">
+          <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden flex-shrink-0">
+            <img
+              src={`/api/philosophers/${firstPhilosopher.id}/logo`}
+              alt={group.name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                target.nextElementSibling!.textContent = initial;
+              }}
+            />
+            <span className="text-sm font-medium text-gray-600">{initial}</span>
+          </div>
+          <a
+            href={profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-gray-700 hover:text-blue-600 transition-colors flex-1 min-w-0"
+          >
+            <div className="font-medium">{group.name}</div>
+            <div className="text-xs text-gray-500">{publicationNames}</div>
+          </a>
+        </div>
+      </div>
+    </li>
   );
 }
 

@@ -86,6 +86,13 @@ export const philosophers: Philosopher[] = [
     rssUrl: 'https://philosophypublics.substack.com/feed',
   },
   {
+    id: 'continentalphilosophynow',
+    name: 'Mona Mona',
+    publicationName: 'Continental Philosophy Now',
+    substackUrl: 'https://continentalphilosophynow.substack.com/',
+    rssUrl: 'https://continentalphilosophynow.substack.com/feed',
+  },
+  {
     id: 'theexistentialreader',
     name: 'Craig Snelgrove',
     publicationName: 'The Existential Reader',

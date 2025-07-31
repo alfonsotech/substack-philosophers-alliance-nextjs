@@ -67,8 +67,8 @@ export function PostsList({ posts, loading, error, hasMore, onLoadMore, search }
   }
 
   return (
-    <div className="flex-1 p-6">
-      <div className="grid gap-6 max-w-4xl mx-auto">
+    <div className="flex-1 p-4 sm:p-6">
+      <div className="grid gap-4 sm:gap-6 max-w-4xl mx-auto">
         {posts.map((post, index) => {
           // Create unique key combining philosopherId and id, with index as fallback
           const uniqueKey = `${post.philosopherId}-${post.id}-${index}`;
