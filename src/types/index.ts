@@ -1,9 +1,13 @@
 export interface Philosopher {
+  _id?: string; // MongoDB ID when from database
   id: string;
   name: string;
   publicationName: string;
   substackUrl: string;
   rssUrl: string;
+  bio?: string;
+  profile_photo_url?: string;
+  recent_posts?: Post[];
 }
 
 export interface Post {

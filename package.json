@@ -6,16 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "tsx scripts/seed-from-rss.ts"
   },
   "dependencies": {
     "@types/fs-extra": "^11.0.4",
+    "date-fns": "^4.1.0",
     "dotenv": "^17.2.0",
     "fs-extra": "^11.3.0",
     "mongodb": "^6.18.0",
+    "mongoose": "^8.19.3",
     "next": "15.4.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-intersection-observer": "^10.0.0",
     "rss-parser": "^3.13.0"
   },
   "devDependencies": {
@@ -27,6 +31,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.4.3",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

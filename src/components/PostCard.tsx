@@ -4,9 +4,10 @@ import { Post } from '@/types';
 
 interface PostCardProps {
   post: Post;
+  searchQuery?: string;
 }
 
-export function PostCard({ post }: PostCardProps) {
+export function PostCard({ post, searchQuery }: PostCardProps) {
   const initial = post.title.charAt(0).toUpperCase();
 
   // Construct author profile URL

@@ -37,13 +37,6 @@ export const philosophers: Philosopher[] = [
     rssUrl: 'https://ericalucaststonestreet.substack.com/feed',
   },
   {
-    id: 'dgilesphd',
-    name: 'D. Giles PhD',
-    publicationName: 'Insert Philosophy Here',
-    substackUrl: 'https://dgilesphd.substack.com',
-    rssUrl: 'https://dgilesphd.substack.com/feed',
-  },
-  {
     id: 'kosmotheoros',
     name: 'Terrence Thomson',
     publicationName: 'Kosmotheoros',
@@ -84,13 +77,6 @@ export const philosophers: Philosopher[] = [
     publicationName: 'Philosophy Publics',
     substackUrl: 'https://philosophypublics.substack.com',
     rssUrl: 'https://philosophypublics.substack.com/feed',
-  },
-  {
-    id: 'continentalphilosophynow',
-    name: 'Mona Mona',
-    publicationName: 'Continental Philosophy Now',
-    substackUrl: 'https://continentalphilosophynow.substack.com/',
-    rssUrl: 'https://continentalphilosophynow.substack.com/feed',
   },
   {
     id: 'theexistentialreader',
